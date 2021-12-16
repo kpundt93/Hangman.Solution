@@ -35,10 +35,8 @@ namespace Hangman.Models
     public Game()
     {
       Random rand = new Random();
-      // int randNum = rand.Next(0, _words.Count - 1);
-      int randNum = rand.Next(0, 0);
+      int randNum = rand.Next(0, _words.Count - 1);
       Answer = _words[randNum];
     }
-
   }
 }

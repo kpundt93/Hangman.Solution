@@ -19,7 +19,7 @@ namespace Hangman.Tests
     public void GameConstructor_SelectsRandomAnswer_String()
     {
       Game newGame = new Game();
-      Assert.AreEqual("inspection", newGame.Answer);
+      Assert.AreEqual(typeof(string), newGame.Answer.GetType());
     }
   }
 }
