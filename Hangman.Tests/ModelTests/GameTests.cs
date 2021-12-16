@@ -21,5 +21,14 @@ namespace Hangman.Tests
       Game newGame = new Game();
       Assert.AreEqual(typeof(string), newGame.Answer.GetType());
     }
+
+    [TestMethod]
+    public void SetCurrentAnswer_SetsAnswerToBlanks_String()
+    {
+      Game newGame = new Game();
+      string[] answerArray = newGame.Answer.Split("");
+      newGame.setCurrentAnswer();
+      Assert.AreEqual(answerArray.Length, newGame.CurrentAnswer.Count);
+    }
   }
 }
