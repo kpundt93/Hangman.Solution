@@ -6,14 +6,20 @@ using System;
 namespace Hangman.Tests
 {
   [TestClass]
-  public class GameTests : IDisposable
+  public class GameTests
   {
-    public void Dispose()
+    [TestMethod]
+    public void GameConstructor_CreatesInstanceOfGame_Game()
     {
-      GAme.ClearAll();
+      Game newGame = new Game();
+      Assert.AreEqual(typeof(Game), newGame.GetType());
     }
 
     [TestMethod]
-    public void GameConstructor_CreatesInstanceOf
+    public void GameConstructor_SelectsRandomAnswer_String()
+    {
+      Game newGame = new Game();
+      Assert.AreEqual("inspection", newGame.Answer);
+    }
   }
 }
