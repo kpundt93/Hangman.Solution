@@ -28,23 +28,78 @@ namespace Hangman.Models
       "tennis"
       };
       
-    public string Answer { get; }
-    public List<char> GuessedLetters { get; set; }
-    public List<string> CurrentAnswer = new List<string> {};
+    public string Answer { get; set; }
+    public List<char> GuessedLetters = new List<char> {};
+    public List<char> CurrentAnswer = new List<char> {};
+
+    public int wrongGuesses { get; set; }
 
     public Game()
     {
       Random rand = new Random();
       int randNum = rand.Next(0, _words.Count - 1);
       Answer = _words[randNum];
+      wrongGuesses = 0;
     }
 
-    public void setCurrentAnswer()
+    public void SetCurrentAnswer()
     {
-      string[] answerArray = Answer.Split("");
-      foreach(string letter in answerArray)
+      char[] answerArray = Answer.ToCharArray();
+      foreach(char letter in answerArray)
       {
-        CurrentAnswer.Add("_ ");
+        CurrentAnswer.Add('_');
+      }
+    }
+
+    public bool GuessLetter(char letter)
+    {
+      char[] answerArray = Answer.ToCharArray();
+      if(GuessedLetters.Contains(letter))
+      {
+        return false;
+      }
+      else if(Answer.Contains(letter))
+      {
+        for(int i = 0; i < CurrentAnswer.Count; i++)
+        {
+          if(answerArray[i] == letter)
+          {
+            CurrentAnswer[i] = letter;
+          }
+        }
+        GuessedLetters.Add(letter);
+        return true;
+      }
+      else
+      {
+        GuessedLetters.Add(letter);
+        wrongGuesses++;
+        return true;
+      }
+    }
+
+    public bool CheckWin()
+    {
+      string currentAnswerString = string.Join("", CurrentAnswer);
+      if (currentAnswerString == Answer)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+
+    public bool CheckLoss()
+    {
+      if(wrongGuesses >= 6)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
       }
     }
   }
