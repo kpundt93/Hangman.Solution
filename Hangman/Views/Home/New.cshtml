@@ -1,0 +1,8 @@
+<h1>Enter a letter to make a guess</h1>
+
+<form action="/show" method="post">
+  <input id="gameId" name="gameId" type="hidden" value="@Model.Id">
+  <label for="letterGuess">Letter Guess:</label>
+  <input id="letterGuess" name="letterGuess" type="text" max="1">
+  <button type="submit">Guess Letter</button>
+</form>

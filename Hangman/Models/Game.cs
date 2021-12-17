@@ -33,6 +33,8 @@ namespace Hangman.Models
     public List<char> CurrentAnswer = new List<char> {};
 
     public int wrongGuesses { get; set; }
+    public int Id { get; }
+    private static List<Item> _instances = new List<Item> { };
 
     public Game()
     {
@@ -40,6 +42,13 @@ namespace Hangman.Models
       int randNum = rand.Next(0, _words.Count - 1);
       Answer = _words[randNum];
       wrongGuesses = 0;
+      _instances.Add(this);
+      Id = _instances.Count;
+    }
+
+    public static Item Find(int searchId)
+    {
+      return _instances[searchId-1];
     }
 
     public void SetCurrentAnswer()
@@ -101,6 +110,11 @@ namespace Hangman.Models
       {
         return false;
       }
+    }
+
+    public static Item Find(int searchId)
+    {
+      return _instances[searchId-1];
     }
   }
 }
